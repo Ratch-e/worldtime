@@ -57,7 +57,7 @@ class App extends Component {
     return (
       <div className="App">
         <input type="text" value={this.state.newCityInput} onChange={e => this.handleInput(e)} />
-        <button onClick={() => this.createNewCity()}>Добавить город</button>
+        <button className="button" onClick={() => this.createNewCity()}>Добавить город</button>
         <p className="errors">{store.error}</p>
         <div className="App__row">
           {store.weatherCards.map((item, key) => (
