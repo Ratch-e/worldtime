@@ -4,19 +4,20 @@ import axios from 'axios';
 class Store {
   @observable weatherCards = [];
   @observable error = '';
-  @observable isLoading = false;
 
   @action
   removeCard = id => {
     console.log(id);
-    if(id !== 0) {
+    if (id !== 0) {
       this.weatherCards.splice(id, 1);
     }
-  }
+  };
+
+  @action
+  setError = error => this.error = error;
 
   @action
   getWeatherInCity = city => {
-    this.isLoading = true;
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&id=524901&APPID=224fda37b0f22b3934a1a5a1a7348ff7&units=metric`,
@@ -28,16 +29,15 @@ class Store {
           {
             temp: ~~response.data.main.temp,
             name: response.data.name,
+            icon: response.data.weather[0].icon,
           },
         ];
       })
-      .catch(error => this.error = "Введите корректный город");
-    this.isLoading = false;
+      .catch(error => (this.error = 'Введите корректный город'));
   };
 
   @action
   getWeatherByLocation = location => {
-    this.isLoading = true;
     axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${
@@ -51,11 +51,11 @@ class Store {
           {
             temp: ~~response.data.main.temp,
             name: response.data.name,
+            icon: response.data.weather[0].icon,
           },
         ];
       })
-      .catch(error => this.error = 'Не удалось получить такущее местоположение');
-    this.isLoading = false;
+      .catch(error => (this.error = 'Не удалось получить текущее местоположение'));
   };
 }
 

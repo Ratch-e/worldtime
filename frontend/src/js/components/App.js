@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import Card from './Card';
-import Loader from '../../images/gif/30.gif';
 
 @inject('Store')
 @observer
@@ -16,7 +15,6 @@ class App extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.createNewCity = this.createNewCity.bind(this);
     this.setCurrentPosition = this.setCurrentPosition.bind(this);
-    this.generateCards = this.generateCards.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +28,7 @@ class App extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => this.props.Store.getWeatherByLocation(position.coords));
     } else {
+      this.props.Store.setError = 'Для работы приложения необходимо включить средства геолокации';
     }
   }
 
@@ -53,25 +52,22 @@ class App extends Component {
     });
   }
 
-  /**
-   * Создание карточек с городами
-   * @param {array} cards
-   */
-  generateCards(cards) {}
-
   render() {
+    const store = this.props.Store;
     return (
       <div className="App">
         <input type="text" value={this.state.newCityInput} onChange={e => this.handleInput(e)} />
-        <button onClick={() => this.createNewCity()}>Click!</button>
-        <p className="errors">{this.props.Store.error}</p>
+        <button onClick={() => this.createNewCity()}>Добавить город</button>
+        <p className="errors">{store.error}</p>
         <div className="App__row">
-          {this.props.Store.isLoading ? <img src={Loader} alt="" /> : null}
-          {this.props.Store.weatherCards.map((item, key) => {
-            return (
-              <Card key={key} temp={item.temp} name={item.name} click={() => this.props.Store.removeCard(key)} />
-            );
-          })}
+          {store.weatherCards.map((item, key) => (
+            <Card 
+              key={key} 
+              icon={item.icon} 
+              temp={item.temp} 
+              name={item.name} 
+              click={() => store.removeCard(key)} />
+          ))}
         </div>
       </div>
     );
