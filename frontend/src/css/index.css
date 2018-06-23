@@ -22,7 +22,8 @@ input {
   margin-right: 20px;
   margin-bottom: 20px;
   background-color: #2196f3;
-  color: #ffffff; }
+  color: #ffffff;
+  cursor: pointer; }
   .card__block {
     display: flex;
     flex-direction: column;
