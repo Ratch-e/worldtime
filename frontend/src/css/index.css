@@ -2,5 +2,30 @@
   box-sizing: border-box; }
 
 body {
-  padding: 0;
+  padding: 20px;
   margin: 0; }
+
+input {
+  padding: 10px;
+  font-size: 18px;
+  border: 0;
+  border-bottom: 1px solid #000000;
+  margin-right: 20px; }
+
+.card {
+  padding: 15px;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: #2196f3;
+  color: #ffffff; }
+  .card__temperature {
+    font-size: 30px;
+    margin-left: 20px; }
+
+.App__row {
+  display: flex;
+  flex-wrap: wrap; }
