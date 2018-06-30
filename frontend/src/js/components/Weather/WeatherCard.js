@@ -1,7 +1,15 @@
 import React from 'react';
 
-const WeatherCard = ({ temp = 0, name = '', click = () => {}, icon }) => (
-  <div className="card" onClick={click}>
+/**
+ * Карточка погоды
+ * @param {Integer} id
+ * @param {Integer} temp температура
+ * @param {String} name название города
+ * @param {Function} clickAction обработчик клика
+ * @param {String} icon имя иконки
+ */
+const WeatherCard = ({ id = 0, temp = 0, name = '', clickAction, icon }) => (
+  <div className="card" onClick={() => clickAction(id)}>
     <div className="card__block">
       {icon ? <img className="card__img" src={`http://openweathermap.org/img/w/${icon}.png`} alt="" /> : null}
       <div className="card__city">{name}</div>

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import WeatherCard from './WeatherCard';
+import AddNewCard from '../../components/Weather/AddNewCard';
+import Error from '../../components/common/Error';
+import WeatherList from '../../components/Weather/WeatherList';
 
 @inject('Store')
 @observer
-class Weather extends Component {
+export default class Weather extends Component {
   constructor(props) {
     super(props);
 
@@ -55,23 +57,11 @@ class Weather extends Component {
   render() {
     const store = this.props.Store;
     return (
-      <div className="App">
-        <input type="text" value={this.state.newCityInput} onChange={e => this.handleInput(e)} />
-        <button className="button" onClick={() => this.createNewCity()}>Добавить город</button>
-        <p className="errors">{store.error}</p>
-        <div className="App__row">
-          {store.weatherCards.map((item, key) => (
-            <WeatherCard 
-              key={key} 
-              icon={item.icon} 
-              temp={item.temp} 
-              name={item.name} 
-              click={() => store.removeCard(key)} />
-          ))}
-        </div>
+      <div className="App weather">
+        <AddNewCard input={this.state.newCityInput} inputHandler={this.handleInput} submit={this.createNewCity} />
+        <Error text={store.error} />
+        <WeatherList list={store.weatherCards} remove={store.removeCard}/>
       </div>
     );
   }
 }
-
-export default Weather;

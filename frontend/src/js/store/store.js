@@ -7,10 +7,10 @@ class Store {
 
   @action
   removeCard = id => {
-    console.log(id);
     if (id !== 0) {
       this.weatherCards.splice(id, 1);
     }
+    console.log(this.weatherCards);
   };
 
   @action
