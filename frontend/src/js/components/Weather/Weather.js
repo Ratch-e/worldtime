@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import Card from './Card';
+import WeatherCard from './WeatherCard';
 
 @inject('Store')
 @observer
-class App extends Component {
+class Weather extends Component {
   constructor(props) {
     super(props);
 
@@ -61,7 +61,7 @@ class App extends Component {
         <p className="errors">{store.error}</p>
         <div className="App__row">
           {store.weatherCards.map((item, key) => (
-            <Card 
+            <WeatherCard 
               key={key} 
               icon={item.icon} 
               temp={item.temp} 
@@ -74,4 +74,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Weather;

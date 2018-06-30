@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ temp = 0, name = '', click = () => {}, icon }) => (
+const WeatherCard = ({ temp = 0, name = '', click = () => {}, icon }) => (
   <div className="card" onClick={click}>
     <div className="card__block">
       {icon ? <img className="card__img" src={`http://openweathermap.org/img/w/${icon}.png`} alt="" /> : null}
@@ -10,4 +10,4 @@ const Card = ({ temp = 0, name = '', click = () => {}, icon }) => (
   </div>
 );
 
-export default Card;
+export default WeatherCard;
